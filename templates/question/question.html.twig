@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Hello home page </h1>
+<ul>
+    <table class="ui celled padded table">
+        <thead>
+        <tr><th class="single line">Utilisateur</th>
+            <th>Titre</th>
+            <th>nombre de réponses</th>
+            <th></th>
+        </tr></thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>
+                    <h2 class="ui center aligned header">{{ question.user }}</h2>
+                </td>
+
+                <td class="right aligned">
+                    {{ question.question.title }}
+                </td>
+                <td class="right aligned">
+                    {% if question.nbAnswers > 0 %}
+                        {{ question.nbAnswers }}
+                    {% else %}
+                        Pas de réponses
+                    {% endif %}
+                </td>
+                <td class="right aligned">
+                    <a class="ui blue basic button" href="http://localhost:8000/answers/{{ question.question.id }}">Voir les réponses</a>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="5">
+                <a class="ui right floated small primary labeled icon button" href="http://localhost:8000/question/create">
+                    <i class="plus circle icon"></i> Poser une question
+                </a>
+            </th>
+        </tr></tfoot>
+    </table>
+
+</ul>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Bienvenu dans la page des bières belges
+{% endblock %}
+
+{% block body %}
+    <h2 class="ui header" style="display: inline-block">{{ question.title }} </h2>
+    <div class="ui inverted segment">
+        <h3>ici, ne s'affiche que les commentaires visibles...</h3>
+        <div class="ui inverted relaxed divided list">
+            {% for answer in answers %}
+                {% if answer.status %}
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">reponse de...
+                                <a class="ui red circular label" data-content="Supprimer" style="float: right;" href="http://localhost:8000/answer/delete/{{ answer.id }}/{{ question.id }}">x</a>
+                            </div>
+                            {{ answer.content }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <th colspan="5">
+            {{ form_start(form, {'attr': {'class': 'ui reply form'}}) }}
+            <form class="ui reply form">
+                <div class="field">
+                    {{ form_widget(form.content) }}
+                </div>
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        {{ form_widget(form.status) }}
+                        <label style="color: white !important;">Rendre visible</label>
+                    </div>
+                </div>
+                {{ form_widget(form.REPONDRE) }}
+            </form>
+            {{ form_end(form) }}
+        </th>
+    </div>
+{% endblock %}
